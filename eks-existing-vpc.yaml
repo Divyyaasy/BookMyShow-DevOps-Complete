@@ -1,0 +1,23 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: bookmyshow-eks
+  region: ap-south-1
+  version: "1.29"
+vpc:
+  id: "vpc-0b24f47679ad00bdd"
+  subnets:
+    public:
+      ap-south-1a:
+        id: "subnet-xxxxx"  # Replace with actual subnet ID
+      ap-south-1b:
+        id: "subnet-yyyyy"  # Replace with actual subnet ID
+nodeGroups:
+  - name: ng-1
+    instanceType: t3.medium
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 3
+    volumeSize: 20
+    ssh:
+      allow: false

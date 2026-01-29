@@ -1,0 +1,24 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: bookmyshow-eks
+  region: ap-south-1
+  version: "1.29"  # Updated to supported version
+nodeGroups:
+  - name: ng-1
+    instanceType: t3.medium
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 3
+    volumeSize: 20
+    ssh:
+      allow: true
+      publicKeyName: my-key-pair
+    labels:
+      role: worker
+    tags:
+      Environment: development
+      Project: bookmyshow
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["api", "audit", "authenticator", "controllerManager", "scheduler"]

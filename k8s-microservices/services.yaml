@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  namespace: bookmyshow-microservices
+spec:
+  selector:
+    app: user-service
+  ports:
+  - port: 80
+    targetPort: 3001
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: movie-service
+  namespace: bookmyshow-microservices
+spec:
+  selector:
+    app: movie-service
+  ports:
+  - port: 80
+    targetPort: 3002
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: booking-service
+  namespace: bookmyshow-microservices
+spec:
+  selector:
+    app: booking-service
+  ports:
+  - port: 80
+    targetPort: 3003
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-service
+  namespace: bookmyshow-microservices
+spec:
+  selector:
+    app: payment-service
+  ports:
+  - port: 80
+    targetPort: 3004
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+  namespace: bookmyshow-microservices
+spec:
+  selector:
+    app: api-gateway
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: LoadBalancer

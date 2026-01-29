@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <description>TestNG Test Configuration</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+        echo "Running TestNG tests..."
+        ./run-tests.sh
+        
+        echo "Generating TestNG report..."
+        if [ -f "test-results/test-report.html" ]; then
+          echo "Test report generated successfully"
+        else
+          echo "Warning: Test report not generated"
+        fi
+      </command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>test-results/*.xml</testResults>
+      <keepLongStdio>true</keepLongStdio>
+      <healthScaleFactor>1.0</healthScaleFactor>
+      <allowEmptyResults>true</allowEmptyResults>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.plugins.htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <hudson.plugins.htmlpublisher.HtmlPublisherTarget>
+          <reportName>TestNG Report</reportName>
+          <reportDir>test-results</reportDir>
+          <reportFiles>test-report.html</reportFiles>
+          <keepAll>true</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+          <allowMissing>true</allowMissing>
+        </hudson.plugins.htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </hudson.plugins.htmlpublisher.HtmlPublisher>
+  </publishers>
+</project>
